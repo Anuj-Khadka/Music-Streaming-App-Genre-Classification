@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% load static %}
+{% block css %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'musicapp/css/about.css' %}">
+{% endblock %}
+{% block body %}
+    <div class="back_arrow">
+        {% comment %} <a href="{% url 'classify' %}">
+            <img src="{% static 'musicapp/images/back key.png' %}" alt="back_arrow" width = "25px" height = "25px">
+        </a> {% endcomment %}
+    </div>    
+    <div class="main_heading">
+        <h2 style = "color:#ffff;">Music Genre Classification Process Completed</h2>
+    </div>
+   
+    <div class="row">
+        <div class="column">
+            <div class="your_genre">
+                <h2  style = "color:#ffff;">The classified genre is <b>{{ genre }}</b></h2>
+            </div> 
+        </div>
+    </div>
+{% endblock body %}

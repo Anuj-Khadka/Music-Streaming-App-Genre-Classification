@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'musicapp/css/classify.css' %}">
+{% endblock %}
+{% block body%}
+
+
+<body>
+    <!--Header-->
+    <div class= "main_title">
+        <h1>Music Genre Classifier</h1>
+        {% comment %} <li>
+            <a href="{% url 'index' %}" class="active active-first">back to home</a>
+            </li> {% endcomment %}
+    </div> 
+    
+    
+
+    <!--Main Content-->
+    <!--Drag and drop infomation-->
+    <div class = "drag_info">
+        <h5>Drag and drop your music file or click on the area and upload. </h5>
+           <h6> Only .wav file is accepted.</h6>
+           
+           <h2>CLASSIFY GENRE</h2>
+    <!--Drag and drop area-->
+    <div class="row">
+        <form action="{% url 'result' %}" method="POST" enctype="multipart/form-data" class="up-form" id ="up-form">
+           {% csrf_token %}
+           <input type="file" name='document' multiple="" class="up-input">
+           {{form.as_table}}
+           <!-- img src="{% static 'musicapp/images/Plus.png' %}" alt="plus" class="plus_icon"-->
+          <p class="up-p">Drag your music file or click here.</p>
+          <button type="submit" class="btn btn-sm btn-success" style="margin-left: 9rem; width: 30vh;">Classify</button>
+        </form>
+    </div> <!-- end of row -->
+</div> <!-- end of drag_info -->
+<script type="text/javascript">
+
+    //Responsive Navigation toggle//
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".navbar-nav");
+    const links = document.querySelectorAll(".navbar-nav li");
+
+    hamburger.addEventListener('click', ()=>{
+    //Animate Links
+    navLinks.classList.toggle("open");
+    links.forEach(link => {
+    link.classList.toggle("fade");
+    });
+
+    //Hamburger Animation
+    hamburger.classList.toggle("toggle");
+    });
+
+    $(document).ready(function(){
+        $('.up-input').change(function () {
+            $('.up-p').text(this.files.length + " file(s) selected");
+        });
+    });
+
+    //Pre-loader fader script
+    $(window).on("load", function() {
+        $(".loader-wrapper").fadeOut(3000);
+    })
+</script>
+
+
+
+    
+{% endblock body %}

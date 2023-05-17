@@ -1,0 +1,262 @@
+*{
+    margin: 0;
+    padding:0px
+}
+/*To use the custom font*/
+@font-face {
+	font-family: 'sansation_regular';
+	src: url("/static/musicapp/fonts/sansation_regular.ttf");
+}
+body{
+    background-image: url("/static/musicapp/images/new.jpg");
+    padding: 5px;
+    background-repeat: no-repeat;
+    background-size: 1600px 700px;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.main_title{
+    display:inline-block;
+}
+.main_title h1{
+    font-size:30px;
+    font-family:sansation_regular,sans-serif;
+    color: #ffff;
+    display: inline-block;
+    letter-spacing: 2px;
+    padding: 15px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+
+/*Drag Info*/
+.drag_info h2{
+    font-size: 25px;
+    font-family: sansation_regular,sans-serif;
+    color: #ffff;
+    display: inline-block;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    margin-left: 44%;
+}
+.drag_info h5{
+    font-size: 20px;
+    font-family: sansation_regular,sans-serif;
+    color: #ffff;
+    margin-top: 60px;
+    margin-left: 25%;
+    font-weight: 100;
+    font-style: justify;
+}
+.drag_info h6{
+    font-size: 20px;
+    font-family: sansation_regular,sans-serif;
+    color: #ffff;
+    margin-top: 10px;
+    margin-left: 26%;
+    font-weight: 100;
+    font-style: justify;
+}
+/*Drag Info ends*/
+
+/*Style for plus icon*/
+img.plus_icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: sansation_regular,sans-serif;
+}
+/*Area of Genre Prediction*/
+.up-form{
+  position: relative !important;
+  left: 50% !important;
+  margin-top: 20px !important;
+  margin-left: -250px !important;
+  width: 500px !important;
+  height: 250px !important;
+  border: 4px dashed #fff !important;
+  /*background-color: #a0bcf0;*/
+  border-radius: 20px;
+  cursor: pointer !important;
+}
+.up-form:hover{
+  background-color:#010913;
+}
+.up-p{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 170px;
+  color: #ffffff;
+}
+
+.up-input{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+}
+button{
+  margin: 0 !important;
+  color: #fff !important;
+  font-family:'Montserrat', sans-serif;
+  font-size: 15px !important;
+  background: #16a085 !important;
+  border: none !important;
+  width: 200px !important;
+  height: 35px !important;
+  margin-top: 30px !important;
+  margin-left: 140px !important;
+  border-radius: 4px !important;
+  border-bottom: 4px solid #117A60;
+  transition: all .2s ease !important;
+  outline: none !important;
+  cursor: pointer;
+}
+button:hover {
+  color: #ffffff !important;
+    background-color: rgb(12, 158, 60) !important;
+}
+
+/*End of Area of Genre Prediction*/
+
+/*Note section*/
+/* 
+.audio_link_wrapper{
+  display: inline-block;
+  background-color: #6f9ae9;
+  margin-top: 100px;
+  margin-left: 20px;
+  border-radius: 10px;
+}
+
+.audio_links{
+  display: inline-block;
+  font-size: 15px;
+  font-family: sansation_regular,sans-serif;
+  color: #ffffff;
+  padding: 20px;
+  line-height: 0.8cm;
+}
+.my_note h5{
+  font-size: 17px;
+  font-family:'Times New Roman', Times, serif;
+  color: #ffffff;
+  font-style: justify;
+  margin-top: 30px;
+  margin-left: 20px;
+}
+End of Note section */
+
+   /*Responsive part*/
+
+   @media (max-width: 1024px) {
+    .main_title h1{
+      font-size: 14px;
+    }
+    .wrapper {
+      height: auto;
+    }
+    nav{
+      
+      z-index: 3;
+    }
+    .hamburger{
+      display: block;
+      position: absolute;
+      cursor: pointer;
+      right: 5%;
+      padding-bottom: 20%;
+      transform: translate(-5%, -50%);
+      z-index: 2;
+      transition: all 0.7s ease;
+    }
+    .navbar-nav{
+      position: fixed;
+      background: #217bc5;
+      height: 100vh;
+      width: 100%;
+      flex-direction: column;
+      clip-path: circle(50px at 90% -20%);
+      -webkit-clip-path: circle(50px at 90% -10%);
+      transition: all 1s ease-out;
+      pointer-events: none;
+    }
+    .navbar-nav.open{
+      clip-path: circle(1000px at 90% -10%);
+      -webkit-clip-path: circle(1000px at 90% -10%);
+      pointer-events: all;
+      right: 1%
+    }
+    .navbar-nav li{
+      opacity: 0;
+      padding-bottom: 20px;
+      padding-left: 20%;
+    }
+    .navbar-nav li:nth-child(1){
+      transition: all 0.5s ease 0.2s;
+    }
+    .navbar-nav li:nth-child(2){
+      transition: all 0.5s ease 0.4s;
+    }
+    .navbar-nav li:nth-child(3){
+      transition: all 0.5s ease 0.6s;
+    }
+    .navbar-nav li:nth-child(4){
+      transition: all 0.5s ease 0.7s;
+    }
+    li.fade{
+      opacity: 1;
+    }
+    .drag_info h5{
+      font-size: 10px;
+      margin-left: 30px;
+    }
+    .drag_info h6{
+      font-size: 10px;
+      margin-left: 30px;
+    }
+    .drag_info h2{
+      font-size: 15px;
+      margin-left: 35%;
+    }
+    .up-form{
+      width: 250px !important;
+      height: 150px !important;
+      margin-left: -125px !important;
+    }
+    img.plus_icon{
+      width: 40px !important;
+      height: 40px;
+      top: 40%
+    }
+    .up-p{
+      font-size: 10px !important;  
+    }
+    button{
+      width: 100px !important;
+      height: 30px !important;
+      margin-left: 70px !important;
+    }
+    .add_music h5{
+      font-size: 12px !important;
+      margin-left: -50px !important;
+    }
+    .dropzone.dz{
+      margin-left: 40px !important;
+      width: 320px !important;
+    }
+  }
+
+
+

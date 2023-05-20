@@ -1,1 +1,1 @@
-# Music-Streaming-App-Genre-Classification
+# Music-Genre-Classification-App

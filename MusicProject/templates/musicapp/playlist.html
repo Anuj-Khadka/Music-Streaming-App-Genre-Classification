@@ -1,0 +1,70 @@
+{% extends 'base.html' %} {% load socialaccount %} {% block title %}
+MelodiaStream | Playlist {% endblock title %} {% block body %} {% load static %}
+<br />
+<div class="container">
+  <header class="section-heading mb-4">
+    <h3 class="section-title">All Playlists</h3>
+  </header>
+  <!-- sect-heading -->
+  <!-- Movie list -->
+  <div class="row playlist-row">
+    {% if playlists %} {% for playlist in playlists %}
+    <div class="col-md-3 playlist">
+      <div class="thumbnail">
+        <a href="{% url 'playlist_songs' playlist.playlist_name %}">
+          <img
+            src="{% static 'musicapp/images/bg.jpg' %}"
+            class="img-responsive"
+            height="200"
+            width="200"
+          />
+          <h4 class="playlist-name">{{playlist.playlist_name}}</h4>
+        </a>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <p>There isn't any playlist! First create new playlist.</p>
+    {% endif %}
+  </div>
+</div>
+
+
+<style>
+  .playlist-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .playlist{
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    margin-right: 1rem;
+  }
+
+.playlist:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.playlist:hover a{
+  text-decoration: none;
+}
+
+.playlist .thumbnail a{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.playlist .thumbnail a .playlist-name{
+  margin-top: 0.5rem;
+}
+
+
+</style>
+
+
+{% endblock body %}

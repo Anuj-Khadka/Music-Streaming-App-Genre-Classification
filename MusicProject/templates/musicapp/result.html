@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'musicapp/css/style.css' %}">
+{% endblock %}
+{% block header %}
+<style>
+    #back_arrow{
+        margin-bottom: 2rem;
+        margin-left: 2rem;
+        cursor: pointer;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+    }
+    
+    #back_arrow > .material-icons{
+        font-size: 2.5rem !important;
+        border-radius:50%;
+        padding: 0.3rem;
+        background: #2c2c2c; }
+
+    #material-icons{ 
+        box-shadow: 2px 3px 20px 5px #141212b9;
+    }
+    
+    #genre-box{
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-left: 0.5rem;
+    border-radius: 0.5rem;
+    padding: 0.2rem 1.1rem;
+    color:aqua !important;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 3px 20px 5px #141212b9;
+}
+#genre-box:hover{
+    box-shadow: none
+}
+.your_genre > p{
+    font-size: 1.5rem;
+}
+    .status{
+        font-size: 2rem;
+    }
+</style>
+ {% endblock header %}
+{% block body %}
+<div class="container py-5">
+    
+    <div id="back_arrow">
+         <span class="material-icons" id="material-icons">navigate_before</span>
+    </div>    
+    <div class="main_heading text-center">
+        <p class="status">Music Genre Classification Process Completed!</p>
+    
+   
+    <div class="row">
+        <div class="column">
+            <div class="your_genre">
+                <p  style = "color:#ffff;">The classified genre is <b id="genre-box">{{ genre }}</b></p>
+                {% if genre == "Rock" %}
+                <a href="{% url 'rock' %}" class="btn btn-primary">Rock</a>
+                {% endif %}
+                {% if genre == "Pop" %}
+                <a href="{% url 'pop' %}" class="btn btn-primary">Pop</a>
+                {% endif %}
+                {% if genre == "R&B" %}
+                <a href="{% url 'rnb' %}" class="btn btn-primary">R&B</a>
+                {% endif %}
+                {% if genre == "Jazz" %}
+                <a href="{% url 'jazz' %}" class="btn btn-primary">Jazz</a>
+                {% endif %}
+                {% if genre == "Classical" %}
+                <a href="{% url 'classical' %}" class="btn btn-primary">Classical</a>
+                {% endif %}
+                {% if genre == "Country" %}
+                <a href="{% url 'country' %}" class="btn btn-primary">Country</a>
+                {% endif %}
+                {% if genre == "Hip Hop" %}
+                <a href="{% url 'hiphop' %}" class="btn btn-primary">Hip Hop</a>
+                {% endif %}
+                {% if genre == "Electronic" %}
+                <a href="{% url 'electronic' %}" class="btn btn-primary">Electronic</a>
+                {% endif %}
+                {% if genre == "Other" %}
+                <a href="{% url 'other' %}" class="btn btn-primary">Other</a>
+                {% endif %}
+            </div> 
+        </div>
+    </div>
+    </div>
+</div>
+
+<script>
+    const backArrow = document.getElementById("back_arrow");
+    const navigateBack = document.getElementById("material-icons")
+    backArrow.addEventListener("mousedown", e=>{
+        navigateBack.style.boxShadow = "none";
+        setTimeout(()=>{
+            history.go(-1)
+        }, 500)
+        
+    })
+    backArrow.addEventListener("mouseup", e=>{
+        navigateBack.style.boxShadow = "2px 3px 20px 5px #141212b9";
+    })
+</script>
+{% endblock body %}

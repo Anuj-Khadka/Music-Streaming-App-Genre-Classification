@@ -1,0 +1,68 @@
+{% extends 'base.html' %} {% load socialaccount %} {% block title %}
+MelodiaStream | Recently Played {% endblock title %} {% block body %}
+<br />
+<div class="container">
+  {% if not query_search %}
+  <div class="recent-played-container songs-container">
+    <header class="section-heading mb-4">
+      <h5 class="section-title">RECENTLY PLAYED</h5>
+    </header>
+    <!-- Recent Song list -->
+    <div class="song-list">
+      {% for song in recent_songs %}
+      <div class="song-cards">
+        <div class="song-card">
+          <div class="hovereffect">
+            <img src="{{ song.song_img.url}}" class="img-responsive" />
+            <div class="overlay">
+              <a class="btn" href="{% url 'play_song_index' song.id %}"
+                ><span class="material-icons"> play_arrow </span></a
+              >
+              <a class="btn" href="{% url 'detail' song.id %}"
+                ><span class="material-icons"> info </span></a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="song-desc">
+          <h5 class="song-singer">{{song.singer}}</h5>
+          <p class="song-name">{{song.name}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% else %}
+  <header class="section-heading">
+    <h5 class="section-title">SEARCH RESULTS</h5>
+  </header>
+  <hr />
+  {% endif %}
+
+  <footer class="footer footer-player col-md-8">
+    <div class="bg-blur"></div>
+    <div class="player">
+      <div class="left">
+        <img src="{{last_played.song_img.url}}" height="90" width="90" />
+        <div class="music-desc">
+          <h5 clh5ss="song">{{last_played.name}}</h5>
+          <p class="artist">{{last_played.album}}</p>
+        </div>
+      </div>
+      <div class="right">
+        <div class="bottom">
+          {% if first_time %}
+          <audio controls="" name="media">
+            <source src="{{last_played.song_file.url}}" type="audio/mpeg" />
+          </audio>
+          {% else %}
+          <audio controls="" autoplay name="media">
+            <source src="{{last_played.song_file.url}}" type="audio/mpeg" />
+          </audio>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+{% endblock body %}

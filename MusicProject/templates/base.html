@@ -1,0 +1,217 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="google-site-verification"
+      content="jfk7kB7nVZyaGC-jAzqr-OmOKUtUWWvpNwUzSJS-cKU"
+    />
+    <link rel="icon" type="image/png" href="/media/favicon.png" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <script src="https://kit.fontawesome.com/a538d60954.js" crossorigin="anonymous"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@icon/themify-icons/themify-icons.css"
+    />
+
+    <title>{% block title %} {% endblock title %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+
+    <link
+      href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="{% static 'musicapp/css/musicplayer.css' %}" rel="stylesheet" />
+    <!--Link to use the font awsesome icons-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <!--Link to use JQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <style>
+      .navbar {
+        font-family: "Source Code Pro", monospace;
+      }
+      html {
+        position: relative;
+        min-height: 100%;
+        background-color: #2c2c2c !important;
+      }
+
+      body {
+        /* Margin bottom by footer height */
+        margin-bottom: 0px;
+      }
+      .card {
+        padding: 0;
+      }
+
+    </style>
+
+    {% block header %} {% endblock header %}
+
+    <link rel="stylesheet" href="../static/musicapp/css/style.css" />
+  </head>
+  <body class="bg-light" style="background: #2c2c2c !important">
+    <nav class="navbar-expand-md" id="nav-bar">
+      <div class="container">
+        <h1>
+          <a href="{% url 'index' %}" class="brand-name"> MelodiaStream
+          </a>
+        </h1>
+        <div class="collapse navbar-collapse" id="nav-items">
+          <a href="{% url 'index' %}" class="mb-3 mx-1">HOME</a>
+          <a href="{% url 'all_songs' %}" class="mb-3 mx-1">SONGS</a>
+          <a href="{% url 'about' %}" class="mb-3 mx-1">ABOUT</a>
+          {% if request.user.is_active %}
+
+          <!-- <div class="mt-2 mx-1"> -->
+          <a type="button" href="{% url 'classify' %}" class="mb-3 mx-1"
+            >Classify</a
+          >
+          {% comment %} <div class="dropdown">
+            <a type="button" href="{% url 'mymusic' %}" class="">My Music</a>
+            <button
+              type="button"
+              id="my-music-dropsdown"
+              class="btn dropdown-toggle dropdown-toggle-split"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+              <ul class="dropdown-menu bg-dark" id="my-music-dropdown-list" >
+                <a class="dropdown-item" href="{% url 'playlist' %}">Playlists</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'favourite' %}"
+                  >Favourite Songs</a
+                >
+              </ul>
+          </div> {% endcomment %}
+          <div class="dropdown ms-1">
+            <a type="button" href="{% url 'mymusic' %}" class="">My Music</a>
+            <button class="btn dropdown-toggle" 
+            id="my-music-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            </button>
+            <ul class="dropdown-menu bg-dark" style="box-shadow: box-shadow: 2px 3px 20px 5px #141212b9;
+            ">
+              <a class="dropdown-item" href="{% url 'playlist' %}">Playlists</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'favourite' %}"
+                >Favourite Songs</a
+              >
+            </ul>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="collapse navbar-collapse justify-content-center align-items-center" id="navbar">
+          {% if request.user.is_active %}
+          <h5 class="text-white mt-3 mx-2">Hi, {{ request.user.username }}</h5>
+          <a href="{% url 'logout' %}" class="btn  mt-2 mx-2">
+            
+            <span class="material-icons">logout</span>
+          </a>
+          {% else %}
+          <a href="{% url 'login' %}" class="btn mt-2 mx-2 logger-btn" id="login-btn"><i class="material-icons">login</i> Log In</a
+          >
+          <a href="{% url 'signup' %}" class="btn mt-2 mx-2 logger-btn" id="signup-btn"
+            >            <span class="material-icons">door_back</span>
+            Sign Up</a
+          >
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+    <div class="top-block"></div>
+    {% block css %}{% endblock %}
+    <div class="main-container">{% block body %} {% endblock body %}</div>
+
+    <div class="content">
+      <div class="lyrics"></div>
+    </div>
+
+<style>
+#login-btn{
+  border: solid 1px #16a085;
+  background: transparent;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+#login-btn:hover{
+  background: #16a085;
+}
+
+#signup-btn{
+  background: #16a085;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+#signup-btn:hover{
+  border: solid 1px #16a085;
+  background: transparent;
+}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+    <!-- jQuery first, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.1.3/smooth-scroll.min.js"
+      integrity="sha512-HYG9E+RmbXS7oy529Nk8byKFw5jqM3R1zzvoV2JnltsIGkK/AhZSzciYCNxDMOXEbYO9w6MJ6SpuYgm5PJPpeQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../static/musicapp/js/index.js"></script>
+    {% block js %} {% endblock js %}
+  </body>
+  <script src="https://kit.fontawesome.com/a538d60954.js" crossorigin="anonymous"></script>
+
+</html>

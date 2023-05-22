@@ -1,0 +1,219 @@
+{% extends 'base.html' %} {% load socialaccount %} {% block title %}
+MelodiaStream | Detail {% endblock title %} {% block header %}
+<style>
+  .heart {
+    font-size: 25px;
+    color: red;
+  }
+</style>
+{% endblock header %} {% block body %}
+<div class="container">
+  {% if messages %}
+  <ul class="messages" style="width: 600px; margin-left: 400px">
+    {% for message in messages %}
+    <div class="alert alert-success">
+      Successfully {{message}}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <div class="detail-wrapper">
+    <div class="img-preview col-md-4">
+      <div class="preview-pic tab-content">
+        <img
+          src="{{songs.song_img.url}}"
+          height="300"
+          width="300"
+          style="padding: 20px; border-radius: 60px 60px 60px 60px"
+        />
+      </div>
+    </div>
+    <div class="details-elab col-md-8">
+      <div class="detail-desc">
+        <h3 class="product-title">{{songs.name}}</h3>
+        <div class="inner-desc">
+
+            <h6>Album: {{songs.album}}</h6>
+            <h6>Singer: {{songs.singer}}</h6>
+            <h6>Release Year: {{songs.year}}</h6>
+        </div>
+      </div>
+      <!-- <audio controls>
+                        <source src="{{ songs.song_file.url }}" type="audio/mpeg">
+                    </audio>   -->
+      <div class="feature-btns">
+        <form method="post" class="col-lg-6">
+          {% csrf_token %}
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#plylist"
+            data-whatever="@mdo"
+          >
+            <i class="material-icons">add_circle</i> Create New Playlist
+          </button>
+          <div
+            class="modal fade"
+            id="plylist"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" id="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    New Playlist
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label"
+                        >Name</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="recipient-name"
+                        name="playlist"
+                      />
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button
+
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="Submit" class="btn btn-primary col-lg-6">
+                    Create Playlist
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <form method="post" class="col-lg-6">
+          {% csrf_token %}
+          <select
+            class="btn btn-success col-lg-6"
+            onChange="form.submit();"
+            name="playlist"
+          >
+            <option selected="selected" disabled>Add to Playlist</option>
+            {% if playlists %} {% for playlist in playlists %}
+            <option value="{{playlist.playlist_name}}">
+              {{playlist.playlist_name}}
+            </option>
+            {% endfor %} {% endif %}
+          </select>
+        </form>
+
+        <form method="post" class="col-lg-6">
+          {% csrf_token %} {% if is_favourite %}
+          <span class="d-flex align-items-center mt-2 ml-2">
+            <!-- <span class="material-icons">favorite</span> -->
+            <button
+              type="submit"
+              name="rm-fav"
+              class="btn btn-danger btn-block"
+              >
+              <span class="material-icons">favorite</span>
+              Remove from Favourites
+            </button>
+          </span>
+          {% else %}
+          <span class="d-flex align-items-center mt-2 ml-2">
+            <!-- <span class="material-icons">favorite</span> -->
+            <button
+              type="submit"
+              name="add-fav"
+              class="btn btn-danger btn-block"
+            >
+            <span class="material-icons">favorite</span>
+              Add to Favourites
+            </button>
+
+            <!-- <input
+              type="submit"
+              id="favbtn"
+              class="btn btn-primary"
+              name="add-fav"
+              value="Add to Favourites"
+            /> -->
+          </span>
+
+          {% endif %}
+        </form>
+        <form class="col-lg-6">
+          <span class="d-flex align-items-center mt-2 ml-2">
+            <a
+              type="button"
+              class="btn btn-danger btn-block"
+              href="{% url 'music' songs.id  %}"
+              >
+              <span class="material-icons">
+                cruelty_free
+                </span>
+                Classify Grenre</a
+            >
+          </span>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<footer class="footer footer-player col-md-8">
+  <div class="bg-blur"></div>
+  <div class="player">
+    <div class="left">
+      <img src="{{last_played.song_img.url}}" height="90" width="90" />
+      <div class="music-desc">
+        <h5 clh5ss="song">{{last_played.name}}</h5>
+        <p class="artist">{{last_played.album}}</p>
+      </div>
+    </div>
+    <div class="right">
+      <div class="bottom">
+        {% if first_time %}
+        <audio controls="" name="media">
+          <source src="{{last_played.song_file.url}}" type="audio/mpeg" />
+        </audio>
+        {% else %}
+        <audio controls="" name="media">
+          <source src="{{last_played.song_file.url}}" type="audio/mpeg" />
+        </audio>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% endblock body %}

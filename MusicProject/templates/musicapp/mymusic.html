@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% block title %} MusicApp - Home {% endblock title %}
+
+<head>
+    <title>My Music</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head> 
+{% block body %}
+
+<div class="container py-5">
+    <div class="play-list-cart list-cart">
+        <a href="{% url 'playlist' %}" class="play-list-link">
+            <h3>Playlist</h3>
+            <p>Browse through your created playlist here.</p>
+        </a>
+    </div>
+    <div class="favourite-cart list-cart">
+        <a href="{% url 'favourite' %}" class="favourite-link">
+            <h3>Favorites</h3>
+            <p>Browse through your created favorite here.</p>
+        </a>
+    </div>
+</div>
+
+<style>
+.list-cart{
+    width:100%;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 2px 3px 20px 5px #141212b9;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.list-cart > a:hover{
+    text-decoration: none;
+}
+
+.list-cart:hover{
+    transform: scale(1.02);
+}
+</style>
+
+{% endblock body %}

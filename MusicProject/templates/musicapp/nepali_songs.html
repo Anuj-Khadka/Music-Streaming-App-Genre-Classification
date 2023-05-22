@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% load socialaccount %} {% block title %}
+MelodiaStream | Nepali Songs {% endblock title %} {% block body %}
+
+<div class="container">
+  <div class="nepali-songs-container songs-container">
+    <header class="section-heading mb-4">
+      <h5 class="section-title">NEPALI SONGS</h5>
+    </header>
+    <!-- Song list -->
+    <div class="song-list">
+      {% if nepali_songs %} {% for song in nepali_songs %}
+      <div class="song-cards">
+        <div class="song-card">
+          <div class="hovereffect">
+            <img src="{{ song.song_img.url}}" class="img-responsive" />
+            <div class="overlay">
+              <a class="btn" href="{% url 'play_song_index' song.id %}"
+                ><span class="material-icons"> play_arrow </span></a
+              >
+              <a class="btn" href="{% url 'detail' song.id %}"
+                ><span class="material-icons"> info </span></a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="song-desc">
+          <h5 class="song-singer">{{song.singer}}</h5>
+          <p class="song-name">{{song.name}}</p>
+        </div>
+      </div>
+      {% endfor %} {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

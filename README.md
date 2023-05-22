@@ -1,2 +1,0 @@
-# Music-Genre-Classification-App
-

@@ -38,3 +38,6 @@ Built using HTML, CSS, JavaScript, and React, our Todo App offers a seamless and
 ## Glimpse
 ## How to Run
 ## Features
+- Different genre and languages musics.
+- Can add the music to your favourite.
+

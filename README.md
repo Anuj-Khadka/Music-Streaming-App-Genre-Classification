@@ -40,4 +40,5 @@ Built using HTML, CSS, JavaScript, and React, our Todo App offers a seamless and
 ## Features
 - Different genre and languages musics.
 - Can add the music to your favourite.
-
+- Can add the music to a playlist and create your own.
+- Classify the genre of the music.
